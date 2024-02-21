@@ -21,7 +21,7 @@ else:
         print("Error: \"data\" directory missing"); exit(1)
     print("Saved.\n")
 
-identifier += '=' * ((4 - len(identifier) % 4) % 4) # idk why it needed padding, thanks stacksoverflow <3
+identifier += '=' * ((4 - len(identifier) % 4) % 4) # idk why it needed padding, thanks stackoverflow <3
 identifier = base64.b64decode(identifier).decode('utf-8')
 with open(_sites_) as i:
     sites = [line.strip() for line in i.readlines()]
