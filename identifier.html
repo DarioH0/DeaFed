@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeaFed Identifier Generator</title>
+<script>
+    window.onload = function() {
+        fetch('https://httpbin.org/headers')
+            .then(response => response.json())
+            .then(data => {
+                delete data.headers['X-Amzn-Trace-Id'];
+                if (data.headers.hasOwnProperty('Host')) {
+                    data.headers['Host'] = '^target-site^';
+                }
+                var headersJson = JSON.stringify(data.headers);
+                var headersBase64 = btoa(headersJson);
+                document.getElementById('headers-json').innerText = headersBase64;
+            })
+            .catch(error => alert('Error fetching headers:', error));
+    }
+</script>
+</head>
+<body>
+    <h1>DeaFed Identifier:</h1>
+    <pre id="headers-json">Loading...</pre>
+</body>
+</html>
